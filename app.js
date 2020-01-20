@@ -4,7 +4,6 @@ const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const productRoutes = require('./api/routes/products')
 const orderRoutes = require('./api/routes/order')
-<<<<<<< Updated upstream
 const{Pool,Client} = require('pg')
 const connectionString = 'postgresql://postgres:akshay123@localhost:5432/restupdated2'
 
@@ -12,27 +11,6 @@ const client = new Client({
     connectionString:connectionString
 })
 client.connect()
-=======
-const db = require('./keys').MongoURI;
-
-//mongodb connection
-const mongoose = require('mongoose')
-mongoose.connect(db, { useUnifiedTopology: true })
-var dbs = mongoose.connection;
-
-
-dbs.on("error", console.error.bind(console, "connection error"));
-dbs.once("open", function(callback) {
-    console.log("Connection succeeded.");
-});
-
-
-
-//this is urls.py of nodejs
-app.use(morgan('dev'));
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json());
->>>>>>> Stashed changes
 
 client.query('SELECT * FROM account_student',(err,res)=>{
     console.log(err,res)
@@ -49,6 +27,10 @@ app.use((req,res,next)=>{
     next();
 })
 
+//this is urls.py of nodejs
+app.use(morgan('dev'));
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
 
 app.use('/products', productRoutes)
