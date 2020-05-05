@@ -1,22 +1,24 @@
 const express = require('express');
 const router = express.Router();
-<<<<<<< Updated upstream
+
+const mongoose = require('mongoose')
+const Product = require('../models/product')
 
 router.get('/', (req, res, next) => {
-    res.status(200).json({
+     res.status(200).json({
         message: "handling from product.js"
     })
 }) 
 
 router.post('/', (req, res, next) => {
-    const product = {
+    console.log('yes')
+    const productl = {
         name: req.body.name,
         price: req.body.price
     }
-=======
-const Product = require('../models/product')
-const mongoose = require('mongoose')
-const db = require('E:\\CodingProjects\\NodeAPIpostman\\keys.js').MongoURI
+// const Product = require('../models/product')
+// const mongoose = require('mongoose')
+// const db = require('E:\\CodingProjects\\NodeAPIpostman\\keys.js').MongoURI
 
 router.get('/', async (req, res, next) => {
 
@@ -46,7 +48,18 @@ router.post('/', (req, res, next) => {
     });
 
 
->>>>>>> Stashed changes
+    console.log(productl)
+    const product = new Product({
+        _id: new mongoose.Types.ObjectId(),
+        name: req.body.name,
+        price: req.body.price
+    })
+    console.log(product)
+    product.save().then(result => {
+        console.log(res)
+    })
+    .catch(err=>console.log(err));
+
     res.status(200).json({
         message: "handling post from product.js",
         createdProduct: product
@@ -55,16 +68,17 @@ router.post('/', (req, res, next) => {
 
 router.get('/:productId', (req, res, next) => {
     const id = req.params.productId;
-    if(id === 'special'){
-        res.status(200).json({
-            "message": "hellnyeah",
-            id: id
+    Product.findById(id).exec().then(doc=>{console.log(doc);
+        res.status(200).json(doc)
+    })
+    .catch(err=>{
+        console.log(err)
+        res.status(500).json({
+            "Type": "Error",
+            "data": err
         })
-    } else{
-        res.status(200).json({
-            "message": "Not hell yeah"
-        })
-    }
+    })
+
 })
 
 router.patch('/:productId', async (req, res, next) => {

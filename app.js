@@ -4,15 +4,20 @@ const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const productRoutes = require('./api/routes/products')
 const orderRoutes = require('./api/routes/order')
-<<<<<<< Updated upstream
-const{Pool,Client} = require('pg')
-const connectionString = 'postgresql://postgres:akshay123@localhost:5432/restupdated2'
+// const{Pool,Client} = require('pg')
+// const mongoose = require('mongoose')
+// const db = require('./keys').MongoURI;
+// const MongoClient = require('mongodb').MongoClient;
+
+
+// MongoClient.connect(db, { useUnifiedTopology: true })
+//     .then(() => console.log('MongoDB connected...'))
+//     .catch(err => console.log(err));
 
 const client = new Client({
     connectionString:connectionString
 })
 client.connect()
-=======
 const db = require('./keys').MongoURI;
 
 //mongodb connection
@@ -32,12 +37,7 @@ dbs.once("open", function(callback) {
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
->>>>>>> Stashed changes
 
-client.query('SELECT * FROM account_student',(err,res)=>{
-    console.log(err,res)
-    client.end()
-})
 
 app.use((req,res,next)=>{
     req.header("Access-Control-Allow-Origin", "*");
@@ -74,3 +74,35 @@ app.use((error, req,res,next) => {
 
 console.log('Server running at http://localhost:3000');
 module.exports = app;
+
+//Misc code
+
+// const connectionString = 'postgresql://postgres:akshay123@localhost:5432/testbb'
+
+// // const client = new Client({
+// //     connectionString:connectionString
+// // })
+// // client.connect()
+
+// // client.query('SELECT * FROM account_student',(err,res)=>{
+// //     console.log(err,res)
+// //     client.end()
+// // })
+
+// const pool = new Pool({
+//     user: "postgres",
+//     host: "localhost",
+//     database: "shop",
+//     password: "akshay123",
+//     port: 5432
+//   })
+
+
+// //   pool.query("CREATE TABLE products (id INT, name VARCHAR)",(err,res)=>{
+// //     console.log(err,res)
+// //     pool.end()
+// // })
+//   pool.query("INSERT INTO products(id,name)values(1,'Microsoft')", (err, res) => {
+//     console.log(err, res)
+//     pool.end()
+//   })
