@@ -1,3 +1,12 @@
+const mongoose = require('mongoose')
+
+
+var Schema = mongoose.Schema
+const productSchema = Schema({
+    name: String,
+    price: Number,
+    quantity: Number
+  });
 // const{Pool,Client} = require('pg')
 // const connectionString = 'postgresql://postgres:akshay123@localhost:5432/shop'
 
